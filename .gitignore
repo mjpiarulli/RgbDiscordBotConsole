@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs
+/packages
+/bin
+/obj
+/RgbLan.DiscordBot.Service/obj/Debug
+/RgbLan.Discord.Common/obj/Debug
+/DataAccess/obj/Debug

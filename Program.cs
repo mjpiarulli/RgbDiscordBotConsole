@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
+using RgbDiscordBot.Common;
 using RgbDiscordBot.DataAccess.Repository;
 using RgbDiscordBot.Extensions;
 
@@ -17,22 +19,22 @@ namespace RgbDiscordBotConsole
         {
             new Program().MainAsync().GetAwaiter().GetResult();
         }
-        
+
         private DiscordSocketClient _client;
-        
+
         public async Task MainAsync()
         {
             _client = new DiscordSocketClient();
-        
+
             _client.Log += Log;
             _client.MessageReceived += MessageReceived;
             _client.Ready += Ready;
-            
+
 
             const string token = "NDA5NDM4ODQyOTQ5NzMwMzA0.DVenQQ.LxJFN0PCvrW5f_b_enCrU1XgT6s"; // Remember to keep this private!
             await _client.LoginAsync(TokenType.Bot, token);
             await _client.StartAsync();
-            
+
             await Task.Delay(-1);
         }
 
@@ -96,13 +98,16 @@ namespace RgbDiscordBotConsole
 
         private async Task Ready()
         {
-            //await BeQuietTimer();
+            await SetUpTimedMessages();
         }
 
         private Task SetUpTimedMessages()
         {
-            var timer = new System.Timers.Timer(10000); // 1 * 10 * 1000
-            timer.Elapsed += async (sender, e) => await SetUpBeQuietTimedMessages();
+            var timer = new System.Timers.Timer(3600000); // 1 * 60 * 60 * 1000
+            //timer.Elapsed += async (sender, e) => await SetUpBeQuietTimedMessages();
+            timer.Elapsed += async (sender, e) => await SetUpCandorisMessages();
+            timer.Elapsed += async (sender, e) => await SetUpTheGameGuyzMessages();
+            timer.Elapsed += async (sender, e) => await SetUpCukUsaMessages();
             timer.Start();
 
             return Task.CompletedTask;
@@ -110,7 +115,30 @@ namespace RgbDiscordBotConsole
 
         private Task SetUpBeQuietTimedMessages()
         {
-            (_client.GetChannel(409443383820550174) as ISocketMessageChannel)?.SendMessageAsync("This is a discount code!");
+            (_client.GetChannel(RgbLanRoomConstants.General) as ISocketMessageChannel)?.SendMessageAsync("This is a discount code!");
+
+            return Task.CompletedTask;
+        }
+
+        private Task SetUpCandorisMessages()
+        {
+            (_client.GetChannel(RgbLanRoomConstants.General) as ISocketMessageChannel)?.SendMessageAsync(
+                "RGB LAN would like to thank Candoris for being a platinum sponsor of our event! Check them out at https://www.candoris.com/");
+
+            return Task.CompletedTask;
+        }
+
+        private Task SetUpTheGameGuyzMessages()
+        {
+            (_client.GetChannel(RgbLanRoomConstants.General) as ISocketMessageChannel)?.SendMessageAsync("RGB LAN is excited to have The Game Guyz on site running our first tabletop section. Check out their booth on site and get more info at https://www.facebook.com/TheGameGuyz/");
+
+            return Task.CompletedTask;
+        }
+
+        private Task SetUpCukUsaMessages()
+        {
+            (_client.GetChannel(RgbLanRoomConstants.General) as ISocketMessageChannel)?.SendMessageAsync(
+                "Computer Upgrade King is one of our awesome platinum sponsors! They offer computer customization and excellent quality PC parts. See more info and deals at https://cukusa.com/");
 
             return Task.CompletedTask;
         }
