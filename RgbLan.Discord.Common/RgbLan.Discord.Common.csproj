@@ -59,7 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventDto.cs" />
     <Compile Include="Extensions\DiscordSocketClientExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="IDiscordBotLogger.cs" />
     <Compile Include="RgbLanRoomConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

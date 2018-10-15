@@ -17,12 +17,8 @@ namespace DataAccess
         T Load(TKey id);
         IList<T> LoadAll();
         bool SaveChanges();
-        bool Refresh(T entity);
         IQueryable<T> FindBy(Expression<Func<T, bool>> a);
         int Count(Expression<Func<T, bool>> predicate);
         bool Exists(Expression<Func<T, bool>> predicate);
-        void ToggleTrackChanges(bool enabled);
-        void ExcludeProperty<TProperty>(T entity, Expression<Func<T, TProperty>> expression);
-        int ExecuteRawSqlQuery(string sql, object[] @params);
     }
 }

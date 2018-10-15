@@ -31,16 +31,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.BulkInsert, Version=6.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.BulkInsert-ef6-ext.6.0.3.1\lib\net45\EntityFramework.BulkInsert.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.MappingAPI, Version=6.1.0.9, Culture=neutral, PublicKeyToken=7ee2e825d201459e, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.MappingAPI.6.1.0.9\lib\net45\EntityFramework.MappingAPI.dll</HintPath>
+    <Reference Include="EntityFramework.MappingAPI, Version=6.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.MappingAPI.6.2.0\lib\net45\EntityFramework.MappingAPI.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -53,8 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Directory\FileInfoRepository.cs" />
-    <Compile Include="Directory\IFileInfoRepository.cs" />
+    <Compile Include="Entity\IGenericEntityRepository.cs" />
+    <Compile Include="IO\FileInfoRepository.cs" />
+    <Compile Include="IO\IFileInfoRepository.cs" />
+    <Compile Include="Json\GenericJsonFileRepository.cs" />
     <Compile Include="UnitOfWorkBase.cs" />
     <Compile Include="Entity\GenericEntityRepository.cs" />
     <Compile Include="IGenericRepository.cs" />

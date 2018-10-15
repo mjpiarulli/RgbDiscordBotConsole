@@ -7,7 +7,7 @@ using EntityFramework.BulkInsert.Extensions;
 
 namespace DataAccess.Entity
 {
-    public class GenericEntityRepository<T, TKey> : IGenericRepository<T, TKey> where T : class
+    public class GenericEntityRepository<T, TKey> : IGenericEntityRepository<T, TKey> where T : class
     {
         protected readonly DbContext Context;
         private bool _disposed;

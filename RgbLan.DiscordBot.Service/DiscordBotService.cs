@@ -8,6 +8,7 @@ using Discord;
 using Discord.WebSocket;
 using RgbLan.Discord.Common;
 using RgbLan.Discord.Common.Extensions;
+using RgbLan.Lan.DataAccess.Repository;
 
 namespace RgbLan.DiscordBot.Service
 {
@@ -55,23 +56,31 @@ namespace RgbLan.DiscordBot.Service
                 await message.Channel.SendMessageAsync("Nuh uh!!");
             if (message.Content == "!nextevent")
             {
-                var nextEvent = scheduleRepository.GetEventByNextStartTime(time);
-                await message.Channel.SendMessageAsync(nextEvent.ToString());
+                var nextEvents = scheduleRepository.GetEventsByNextStartTime(time);
+                if(nextEvents == null)
+                    await message.Channel.SendMessageAsync("No next event found :(");
+                await message.Channel.SendMessageAsync(nextEvents.ToMoreBetterString());
             }
             if (message.Content == "!nextgameevent")
             {
-                var nextEvent = scheduleRepository.GetEventByNextStartTimeAndEventType(time, "Game");
-                await message.Channel.SendMessageAsync(nextEvent.ToString());
+                var nextEvents = scheduleRepository.GetEventsByNextStartTimeAndEventType(time, "Game");
+                if (nextEvents == null)
+                    await message.Channel.SendMessageAsync("No next event found :(");
+                await message.Channel.SendMessageAsync(nextEvents.ToMoreBetterString());
             }
             if (message.Content == "!nexttabletopevent")
             {
-                var nextEvent = scheduleRepository.GetEventByNextStartTimeAndEventType(time, "Tabletop");
-                await message.Channel.SendMessageAsync(nextEvent.ToString());
+                var nextEvents = scheduleRepository.GetEventsByNextStartTimeAndEventType(time, "Tabletop");
+                if (nextEvents == null)
+                    await message.Channel.SendMessageAsync("No next event found :(");
+                await message.Channel.SendMessageAsync(nextEvents.ToMoreBetterString());
             }
 
             if (message.Content == "!currentevents")
             {
-                var currentEvents = scheduleRepository.GetEventsByNextStartTime(time);
+                var currentEvents = scheduleRepository.GetCurrentEvents(time);
+                if (currentEvents == null)
+                    await message.Channel.SendMessageAsync("No current event found :(");
                 await message.Channel.SendMessageAsync(currentEvents.ToMoreBetterString());
             }
         }
@@ -127,7 +136,7 @@ namespace RgbLan.DiscordBot.Service
             const string theGameGuyzMessage = "RGB LAN is excited to have The Game Guyz on site running our first tabletop section. Check out their booth on site and get more info at https://www.facebook.com/TheGameGuyz/";
             const string cukUsaMessage = "Computer Upgrade King is one of our awesome platinum sponsors! They offer computer customization and excellent quality PC parts. See more info and deals at https://cukusa.com/";
             const ulong room = RgbLanRoomConstants.Dev;
-            const int timeMilli = 30000;
+            const int timeMilli = 300000;
 
             return new List<TimedMessageDto>
             {

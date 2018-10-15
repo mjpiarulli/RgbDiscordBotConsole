@@ -9,3 +9,10 @@
 /RgbLan.DiscordBot.Service/obj/Debug
 /RgbLan.Discord.Common/obj/Debug
 /DataAccess/obj/Debug
+*.user
+/RgbLan.Lan.DataAccess/bin/Debug
+/RgbLan.Lan.DataAccess/obj/Debug
+/RgbLan.DiscordBot.Service/bin/Debug
+/RgbLan.DiscordBot.RgbDiscordBotConsole/bin/Debug
+/RgbLan.DiscordBot.RgbDiscordBotConsole/obj/Debug
+/RgbLan.Discord.Common/bin/Debug
